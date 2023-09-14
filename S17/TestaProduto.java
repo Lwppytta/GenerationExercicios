@@ -8,6 +8,7 @@ public class TestaProduto {
 		Scanner leia = new Scanner(System.in);
 		int i = 0;
 		float m = 0;
+		boolean lop = true;
 
 		Jogo j = new Jogo();
 		j.setPreco(15.99f);
@@ -24,23 +25,27 @@ public class TestaProduto {
 		j.setNomeJogo(leia.next());
 		System.out.println("Loja que vai comprar:");
 		j.setLojas(leia.next());
-		
-		try {
-			System.out.println("Qual o valor do frete?");
-			m = leia.nextFloat();
-			
-			j.setFrete(m);
-			i = 1;
-		} catch (InputMismatchException e) {
-			System.out.println("Isso é um valor?");
-		} finally {
-			if (i != 1) {
-				System.out.println("Frete invalido.");
-				System.out.println("...............");
-			} else {
-				System.out.println("...............");
+
+		do {
+			try {
+				System.out.println("Qual o valor do frete?");
+				m = leia.nextFloat();
+
+				j.setFrete(m);
+				i = 1;
+			} catch (InputMismatchException e) {
+				System.err.println("Erro:" + e);
+				leia.nextLine();
+				System.out.println("Isso é um valor?");
+			} finally {
+				if (i != 1) {
+					System.out.println("Frete invalido.");
+					System.out.println("...............");
+				} else {
+					System.out.println("...............");
+				}
 			}
-		}
+		} while (lop);
 
 		j.ImprimirJogo();
 		c.ImprimirConsole();
